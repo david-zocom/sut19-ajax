@@ -1,16 +1,30 @@
 window.addEventListener('load', () => {
+    const url = 'https://forverkliga.se/JavaScript/api/simple.php';
 
     let simpleButton = document.querySelector('.ajax-simple button');
     simpleButton.addEventListener('click', () => {
-        const url = 'https://forverkliga.se/JavaScript/api/simple.php';
         // fetch utan await/async
-        fetch(url)
+        const options = {
+            method: 'GET'
+        }
+        let value = document.querySelector('.ajax-simple input').value;
+        let qs = `?key=` + value;
+        // Varning! value kommer från användaren och behöver säkras i en riktig app.
+
+        fetch(url + qs, options)
         .then(response => response.json())
         .then(json => {
             console.log('Nu har datan kommit!');
             let output = document.querySelector('.ajax-simple pre');
             output.innerText = JSON.stringify(json);
-        })    
+
+            let timePara = document.querySelector('.ajax-simple .time');
+            if( json.message && json.time ) {
+                timePara.innerText = `${json.message}. The time is ${json.time}.`;
+            } else {
+                timePara.innerText = 'Could not retrieve time from API.';
+            }
+        })
     })
 })
 
