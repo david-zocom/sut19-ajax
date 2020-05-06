@@ -1,6 +1,11 @@
 window.addEventListener('load', () => {
-    const url = 'https://forverkliga.se/JavaScript/api/simple.php';
+    ajaxSimple();
+    ajaxError();
+    ajaxList();
+})
 
+function ajaxSimple() {
+    const url = 'https://forverkliga.se/JavaScript/api/simple.php';
     let simpleButton = document.querySelector('.ajax-simple button');
     simpleButton.addEventListener('click', async () => {
         // fetch utan await/async
@@ -24,9 +29,9 @@ window.addEventListener('load', () => {
             timePara.innerText = 'Could not retrieve time from API.';
         }
     })
+}
 
-
-
+function ajaxError() {
     let errorButton = document.querySelector('.ajax-error button');
     errorButton.addEventListener('click', async () => {
         const url = 'http://forverkliga.se/JavaScript/api/crud.php';
@@ -39,8 +44,11 @@ window.addEventListener('load', () => {
             output.innerText = error.message;
         }
     })
-})
+}
 
+function ajaxList() {
+    
+}
 /* fetch(url)
 .then(resp => resp.json())
 .catch(error => {}) */
