@@ -47,10 +47,42 @@ function ajaxError() {
 }
 
 function ajaxList() {
-    
+    const url = 'http://forverkliga.se/JavaScript/api/simple.php?world';
+    let listButton = document.querySelector('.ajax-list button');
+    listButton.addEventListener('click', async () => {
+        const response = await fetch(url);
+        const countryData = await response.json();
+        console.log('JSON from API (world) ', countryData);
+
+        // Skapa ett div-element för varje objekt i listan
+        // - vanlig for-loop, lista.forEach, lista.map
+        // Fyll div-elementet med innehåll
+        // Lägg till elementet sist i .country-list
+
+        let countryList = document.querySelector('.ajax-list .country-list');
+        let elements = countryData.map(countryToDom)
+        .forEach(element => {
+            countryList.appendChild(element)
+        })
+    })
+}
+function countryToDom(country) {
+    let el = document.createElement('div');
+    // Alternativ lösning - fungerar bra så länge man inte behöver använda addEventListener
+    // el.innerHTML = `<h3>${country.name}</h3> Has a population of ${country.population} and is on ${country.continent}.`;
+
+    let heading = document.createElement('h3');
+    heading.innerText = country.name;
+    el.appendChild(heading);
+
+    let content = document.createElement('span');
+    content.innerText = `Has a population of ${country.population} and is in ${country.continent}.`;
+    el.appendChild(content);
+    return el;
 }
 /* fetch(url)
 .then(resp => resp.json())
+.then(json => { do stuff with data })
 .catch(error => {}) */
 
 /*

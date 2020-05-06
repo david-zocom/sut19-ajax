@@ -13,3 +13,22 @@ h1 {
     background-color: antiquewhite;
     white-space: pre-wrap;
 }
+
+.country-list {
+    margin: 0.5em;
+    padding: 1em;
+    border: 2px solid #D7DF01;
+    border-radius: 10px;
+}
+
+.country-list > :hover {
+    color: gray;
+}
+.country-list > * {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.country-list h3 {
+    margin: 0px;
+    /* background-color: hotpink; */
+}
