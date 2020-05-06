@@ -24,8 +24,26 @@ window.addEventListener('load', () => {
             timePara.innerText = 'Could not retrieve time from API.';
         }
     })
+
+
+
+    let errorButton = document.querySelector('.ajax-error button');
+    errorButton.addEventListener('click', async () => {
+        const url = 'http://forverkliga.se/JavaScript/api/crud.php';
+        let output = document.querySelector('.ajax-error pre');
+        const response = await fetch(url);
+        try {
+            const json = await response.json();
+            output.innerText = JSON.stringify(json);
+        } catch(error) {
+            output.innerText = error.message;
+        }
+    })
 })
 
+/* fetch(url)
+.then(resp => resp.json())
+.catch(error => {}) */
 
 /*
 {
